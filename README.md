@@ -36,8 +36,8 @@ DBpia Open API를 통한 논문 수집과 OpenAI 임베딩 기반 의미 검색�
 ### Poetry를 사용한 설치 (권장)
 ```bash
 # 1) 저장소 클론
-git clone https://github.com/your-org/papers-api.git
-cd papers-api
+git clone https://github.com/seunghak0616/paper.git
+cd paper
 
 # 2) Poetry로 의존성 설치
 poetry install
@@ -193,7 +193,7 @@ make clean-data        # 데이터 파일 정리
 ### 프로젝트 구조
 
 ```
-papers-api/
+paper/
 ├── app/                    # 메인 애플리케이션
 │   ├── core/              # 핵심 컴포넌트 (로깅 등)
 │   ├── models.py          # SQLAlchemy 모델
@@ -206,11 +206,13 @@ papers-api/
 │   └── services/          # 비즈니스 로직 계층
 ├── crawler/               # 크롤링 모듈
 ├── scripts/               # ETL 및 유틸리티
+├── frontend/              # 웹 프론트엔드
 ├── tests/                 # 테스트 코드
 │   ├── unit/             # 단위 테스트
 │   ├── integration/      # 통합 테스트
 │   └── fixtures/         # 테스트 데이터
-├── docs/                  # 문서
+├── data/                  # 데이터 파일
+├── downloaded_pdfs/       # 다운로드된 PDF 파일
 ├── pyproject.toml         # Poetry 설정
 ├── Makefile              # 개발 워크플로우
 └── docker-compose.yml    # Docker 설정
@@ -297,7 +299,7 @@ logs/
 
 ```bash
 # 이미지 빌드
-docker build -t papers-api:latest .
+docker build -t paper-api:latest .
 
 # 프로덕션 실행
 docker-compose -f docker-compose.prod.yml up -d

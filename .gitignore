@@ -61,6 +61,11 @@ pdfs/
 .pytest_cache/
 .coverage
 htmlcov/
+*.png
+*.jpg
+*.jpeg
+*_test.py
+*_screenshot.*
 
 # Jupyter
 .ipynb_checkpoints/

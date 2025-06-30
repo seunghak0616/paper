@@ -1,0 +1,29 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+
+# Project files
+README.md
+TODO.md
+*.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Secrets
+.env
+*.env.*
+
+# IDE settings
+.vscode/
+.idea/ 

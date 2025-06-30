@@ -1,0 +1,80 @@
+{
+  "papers": [
+    {
+      "title": "딥러닝 기반 건축 설계 자동화 시스템 개발",
+      "authors": "김건축, 박딥러닝, 이자동화",
+      "publisher": "한국건축학회",
+      "publication": "대한건축학회논문집",
+      "dbpia_id": "NODE10234567",
+      "content_type": "1",
+      "category": "4",
+      "publication_year": 2023,
+      "publication_month": 6,
+      "detail_url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10234567",
+      "preview_url": "https://www.dbpia.co.kr/journal/preview?nodeId=NODE10234567",
+      "is_free": false,
+      "price": 3000.0,
+      "preview_available": true,
+      "search_keywords": "건축설계",
+      "source": "ddpia",
+      "crawled_at": "2025-06-29 22:48:09.192592",
+      "original_abstract": "본 연구는 딥러닝 기술을 활용한 건축 설계 자동화...",
+      "abstract": "본 연구는 딥러닝 기술을 활용한 건축 설계 자동화 시스템 개발에 관한 것이다. \n            기존의 수동적인 건축 설계 과정에서 발생하는 시간 소모와 인적 오류를 최소화하기 위해 \n            CNN(Convolutional Neural Network)과 GAN(Generative Adversarial Network)을 결합한 \n            하이브리드 딥러닝 모델을 제안하였다. 실험 결과, 제안된 시스템은 기존 설계 시간을 \n            60% 단축시키면서도 설계 품질을 15% 향상시키는 것으로 나타났다. 또한 사용자 만족도 \n            조사에서 85% 이상의 긍정적 평가를 받았으며, 향후 건축 산업의 디지털 전환에 \n            중요한 기여를 할 것으로 기대된다.",
+      "abstract_enhanced": true,
+      "abstract_quality_score": 10,
+      "full_text": "",
+      "pdf_local_path": null,
+      "pdf_file_size": 0,
+      "text_extraction_method": null,
+      "text_quality_score": 0,
+      "extraction_status": "failed",
+      "extracted_at": "2025-06-29 22:48:12.197354"
+    },
+    {
+      "title": "스마트 시티를 위한 IoT 기반 환경 모니터링 플랫폼",
+      "authors": "정스마트, 김IoT, 박모니터링",
+      "publisher": "한국정보과학회",
+      "publication": "정보과학회논문지",
+      "dbpia_id": "NODE10234568",
+      "content_type": "1",
+      "category": "4",
+      "publication_year": 2023,
+      "publication_month": 8,
+      "detail_url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10234568",
+      "preview_url": "https://www.dbpia.co.kr/journal/preview?nodeId=NODE10234568",
+      "is_free": true,
+      "price": 0.0,
+      "preview_available": true,
+      "search_keywords": "스마트시티",
+      "source": "ddpia",
+      "crawled_at": "2025-06-29 22:48:09.192717",
+      "original_abstract": "스마트 시티 환경에서 IoT 센서를 활용한...",
+      "abstract": "스마트 시티 구현을 위한 핵심 기술로 IoT 기반 환경 모니터링 플랫폼을 개발하였다. \n            본 플랫폼은 대기질, 소음, 온도, 습도, 교통량 등 도시 환경의 다양한 요소들을 \n            실시간으로 모니터링하고 분석하는 통합 시스템이다. 클라우드 기반 데이터 처리와 \n            머신러닝 알고리즘을 통해 환경 변화 패턴을 예측하고 최적화된 도시 관리 방안을 \n            제시한다. 서울시 강남구 시범 지역에서 6개월간 운영한 결과, 환경 모니터링 정확도 \n            95%, 예측 정확도 87%를 달성하였으며, 시민 만족도가 23% 향상되었다.",
+      "abstract_enhanced": true,
+      "abstract_quality_score": 10,
+      "full_text": "Abstract\n\nThis paper presents an IoT-based environmental monitoring platform for smart cities.\n\n1. Introduction\n\nThe rapid urbanization and environmental challenges require innovative solutions\nfor sustainable city management. IoT technology provides real-time monitoring\ncapabilities that can significantly improve urban environmental quality.\n\n2. System Architecture\n\n2.1 Sensor Network\nThe platform employs various types of sensors:\n- Air quality sensors (PM2.5, PM10, CO2, NO2)\n- Noise level sensors\n- Temperature and humidity sensors\n- Traffic monitoring cameras\n- Weather stations\n\n2.2 Data Processing Pipeline\nRaw sensor data is processed through multiple stages:\n1. Data collection and validation\n2. Real-time processing and filtering\n3. Machine learning analysis\n4. Prediction and recommendation generation\n\n3. Implementation\n\n3.1 Hardware Components\n- Raspberry Pi 4B for edge computing\n- LoRaWAN modules for long-range communication\n- Various environmental sensors\n- Solar panels for sustainable power supply\n\n3.2 Software Stack\n- Backend: Node.js with Express framework\n- Database: MongoDB for time-series data storage\n- Frontend: React.js with D3.js for visualization\n- Machine Learning: Python with TensorFlow\n\n4. Case Study: Gangnam District, Seoul\n\n4.1 Deployment\n50 monitoring stations were deployed across Gangnam district\ncovering residential, commercial, and industrial areas.\n\n4.2 Results\nAfter 6 months of operation:\n- Monitoring accuracy: 95%\n- Prediction accuracy: 87%\n- Citizen satisfaction: increased by 23%\n- Response time to environmental incidents: reduced by 40%\n\n5. Conclusion\n\nThe proposed IoT-based environmental monitoring platform demonstrates\nsignificant potential for smart city applications. Future work will focus\non expanding coverage and integrating with city management systems.",
+      "pdf_local_path": "dbpia_downloads/NODE10234568.pdf",
+      "pdf_file_size": 38,
+      "text_extraction_method": "pdfplumber",
+      "text_quality_score": 8.1,
+      "extraction_status": "success",
+      "extracted_at": "2025-06-29 22:48:18.705802"
+    }
+  ],
+  "summary": {
+    "total_papers": 2,
+    "enhanced_abstracts": 2,
+    "successful_extractions": 1,
+    "avg_abstract_quality": 10.0,
+    "avg_text_quality": 8.1
+  },
+  "timestamp": "2025-06-29T22:48:18.706082",
+  "system_info": {
+    "extraction_methods": [
+      "pdfplumber",
+      "PyPDF2"
+    ],
+    "quality_scoring": "automatic",
+    "file_management": "hash-based deduplication"
+  }
+}

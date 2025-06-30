@@ -1,0 +1,16 @@
+{
+  "name": "dbpia-crawler",
+  "version": "1.0.0",
+  "description": "DBpia Paper Crawler and API",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:e2e": "playwright test tests/e2e.spec.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.43.0"
+  }
+} 

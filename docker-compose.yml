@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: papers_db
+    environment:
+      - POSTGRES_DB=papers
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: papers_api
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app # 로컬 현재 폴더와 컨테이너 /app 폴더 동기화
+    command: ["python", "main.py", "server", "--host", "0.0.0.0", "--port", "8000"]
+    restart: always
+
+  crawler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: papers_crawler
+    depends_on:
+      - db
+    command: ["python", "main.py", "crawl"]
+    volumes:
+      - .:/app
+    restart: "no" # 필요할 때만 수동으로 실행
+
+volumes:
+  postgres_data:
+    driver: local 

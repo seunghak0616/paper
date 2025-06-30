@@ -1,0 +1,183 @@
+[tool.poetry]
+name = "papers-api"
+version = "0.4.0"
+description = "DBpia 논문 크롤링 및 AI 검색 API"
+authors = ["Papers Team <team@papers.dev>"]
+readme = "README.md"
+packages = [{include = "app"}, {include = "crawler"}, {include = "scripts"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# Web Framework
+fastapi = "^0.111.0"
+uvicorn = {extras = ["standard"], version = "^0.29.0"}
+# HTTP & WebSocket
+requests = "^2.31.0"
+websockets = "^12.0"
+# Database
+sqlalchemy = "^2.0.0"
+psycopg2-binary = "^2.9.9"
+sqlalchemy-pgvector = "^0.2.2"
+# Configuration & Settings
+pydantic = "^2.0.0"
+pydantic-settings = "^2.0.0"
+python-dotenv = "^1.0.1"
+# AI & ML
+openai = "^1.25.0"
+tiktoken = "^0.7.0"
+# PDF Processing
+pypdf = "^4.2.0"
+# Web Scraping
+playwright = "^1.43.0"
+# Utilities
+tqdm = "^4.66.0"
+loguru = "^0.7.2"
+typer = "^0.12.0"
+# Rate Limiting & Security
+slowapi = "^0.1.9"
+
+[tool.poetry.group.dev.dependencies]
+# Testing
+pytest = "^8.2.0"
+pytest-cov = "^5.0.0"
+pytest-mock = "^3.14.0"
+pytest-asyncio = "^0.23.0"
+httpx = "^0.27.0"
+# Code Quality
+ruff = "^0.4.4"
+black = "^24.0.0"
+isort = "^5.13.0"
+mypy = "^1.10.0"
+# Security
+bandit = "^1.7.0"
+safety = "^3.2.0"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.5.0"
+mkdocs-material = "^9.5.0"
+mkdocstrings = {extras = ["python"], version = "^0.25.0"}
+
+[tool.poetry.scripts]
+papers = "main:app"
+crawl = "crawler.dbpia_crawler:main"
+etl = "scripts.etl:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# Tool configurations
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/*" = ["B011"]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["app", "crawler", "scripts"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "slowapi.*",
+    "loguru",
+    "playwright.*",
+    "sqlalchemy_pgvector.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=app",
+    "--cov-report=html:htmlcov",
+    "--cov-report=term-missing",
+    "--cov-fail-under=50",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests", 
+    "slow: Slow running tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "*/tests/*",
+    "*/venv/*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+show_missing = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "venv"]
+skips = ["B101", "B601"]  # Skip assert_used and shell injection in tests

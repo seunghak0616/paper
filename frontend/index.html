@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>논문 데이터베이스 뷰어 v2.0</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-database"></i> 논문 데이터베이스 뷰어</h1>
+            <p class="subtitle">수집된 논문 데이터를 효율적으로 탐색하고 관리하세요</p>
+        </header>
+
+        <!-- Search and Filter Controls -->
+        <div class="controls">
+            <div class="search-section">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="논문 제목, 저자, 키워드로 검색...">
+                    <button id="searchBtn" class="search-btn">검색</button>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label for="statusFilter">상태</label>
+                    <select id="statusFilter">
+                        <option value="all">전체</option>
+                        <option value="success">추출 성공</option>
+                        <option value="failed">추출 실패</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="yearFilter">발행년도</label>
+                    <select id="yearFilter">
+                        <option value="all">전체</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sortBy">정렬</label>
+                    <select id="sortBy">
+                        <option value="title">제목순</option>
+                        <option value="year">발행년도순</option>
+                        <option value="quality">품질점수순</option>
+                    </select>
+                </div>
+                
+                <button id="resetBtn" class="reset-btn">
+                    <i class="fas fa-undo"></i> 초기화
+                </button>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalCount">0</h3>
+                    <p>총 논문 수</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon success">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="successCount">0</h3>
+                    <p>추출 성공</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon failed">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="failedCount">0</h3>
+                    <p>추출 실패</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon quality">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="avgQuality">0.0</h3>
+                    <p>평균 품질점수</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Papers List -->
+        <div class="papers-section">
+            <div class="section-header">
+                <h2>논문 목록</h2>
+                <div class="view-options">
+                    <button id="gridViewBtn" class="view-btn active">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button id="listViewBtn" class="view-btn">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="papersContainer" class="papers-container grid-view">
+                <!-- Papers will be loaded here -->
+            </div>
+            
+            <div id="loadingSpinner" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>데이터를 불러오는 중...</p>
+            </div>
+            
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <h3>데이터가 없습니다</h3>
+                <p>검색 조건을 변경하거나 데이터를 다시 불러와보세요.</p>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button id="prevBtn" class="page-btn" disabled>
+                <i class="fas fa-chevron-left"></i> 이전
+            </button>
+            <div id="pageNumbers" class="page-numbers"></div>
+            <button id="nextBtn" class="page-btn">
+                다음 <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Paper Detail Modal -->
+    <div id="paperModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">논문 상세 정보</h2>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="paper-details">
+                    <!-- Detail content will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="previewPdf()" class="btn-preview" id="previewPdfBtn">
+                    <i class="fas fa-eye"></i> PDF 미리보기
+                </button>
+                <button onclick="downloadPdf()" class="btn-download" id="downloadPdfBtn">
+                    <i class="fas fa-download"></i> PDF 다운로드
+                </button>
+                <button onclick="closeModal()" class="btn-secondary">
+                    닫기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Preview Modal -->
+    <div id="pdfModal" class="modal pdf-modal">
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h2 id="pdfModalTitle">PDF 미리보기</h2>
+                <button class="close-btn" onclick="closePdfModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="pdf-modal-body">
+                <div id="pdfViewer" class="pdf-viewer">
+                    <!-- PDF will be loaded here -->
+                </div>
+                <div id="pdfLoadingSpinner" class="pdf-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>PDF를 불러오는 중...</p>
+                </div>
+                <div id="pdfError" class="pdf-error" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>PDF를 불러올 수 없습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

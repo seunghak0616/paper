@@ -1,0 +1,90 @@
+# Environment files - CRITICAL for security
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Data files
+data/
+!data/.gitkeep
+pdfs/
+*.pdf
+
+# Test outputs
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Playwright
+test-results/
+playwright-report/
+
+# Docker
+.docker/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Application specific
+metadata.json
+*.pkl
+*.pickle
+
+# Security - API keys and credentials
+*_key.txt
+*_secret.txt
+credentials.json
+config.json
+secrets/

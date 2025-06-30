@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "errors": [],
+  "console_messages": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:8000/papers?limit=100",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "log",
+      "text": "API 로드 실패, Mock 데이터 사용: TypeError: Failed to fetch\n    at loadPapers (http://localhost:3000/script.js:75:32)\n    at HTMLDocument.initializeApp (http://localhost:3000/script.js:60:15)",
+      "location": {
+        "url": "http://localhost:3000/script.js",
+        "lineNumber": 97,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://localhost:3000/favicon.ico",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "stat_count": 4,
+  "paper_count": 1
+}
